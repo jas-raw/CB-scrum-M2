@@ -1,0 +1,27 @@
+$border: ligthgray;
+$btn-bg-color: #17a2b8;
+$btn-color: white;
+input, input:focus{
+    color: $btn-bg-color;
+    background-color: transparent;
+}
+.mh{
+    height: 100vh;
+}
+.border{
+    border-radius: 10px;
+    border: 1px solid $border;
+}
+.btn-outline-pets{
+    color: $btn-bg-color;
+    background-color: $btn-color;
+    border: 1px solid $btn-bg-color;
+}
+.btn-pets{
+    background-color: $btn-bg-color;
+    color: $btn-color;
+}
+.card{
+    background-color: $border;
+    color: $btn-bg-color;
+}

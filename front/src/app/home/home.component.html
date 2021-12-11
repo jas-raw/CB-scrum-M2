@@ -1,54 +1,63 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <form onsubmit="save($event)">
-                <label for="add" class="form-label">Añadir tarea:</label>
-                <input id='add' type="text" class="form-control">
-                <input value="Guardar" type="submit" class="btn btn-success">
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div *ngIf="tasks.length === 0">
-                <strong>No hay tareas aún</strong>
+<div class="container-fluid mh bg-global">
+    <div class="row mh justify-content-center align-items-center">
+        <div class="col-10 card px-4 py-2">
+            <div class="row">
+                <div class="col card">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <h1>Tareas</h1>
+                        </div>
+                    </div>
+                    <form onsubmit="save($event)">
+                        <label for="add" class="form-label">Añadir tarea:</label>
+                        <input id='add' type="text" class="form-control my-1">
+                        <input value="Guardar" type="submit" class="btn btn-pets my-2">
+                    </form>
+                </div>
             </div>
-            <div *ngIf="tasks.length !== 0">
-                <table>
-                    <thead>
-                        <tr class="row justify-content-around">
-                            <th class="col-3">Tarea</th>
-                            <th class="col-3">Creada el:</th>
-                            <th class="col-3">Progreso</th>
-                            <th class="col-3">Finalizada</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let task of tasks; index as i">
-                            <td>
-                                <span>{{task.task_name}}</span>
-                            </td>
-                            <td>
-                                <span>{{task.create_at}}</span>
-                            </td>
-                            <td>
-                                <span *ngIf="task.update_at !== null">{{task.update_at}}</span>
-                                <button (click)='inProgress($event, i)' *ngIf="task.update_at === null" class="btn btn-success">En progreso</button>
-                            </td>
-                            <td>
-                                <span *ngIf="task.update_at === null">La tarea aún no inicia</span>
-                                <span *ngIf="task.update_at !== null && task.finalize_at !== null">{{task.finalize_at}}</span>
-                                <button (click)='finalize($event, i)' *ngIf="task.update_at !== null && task.finalize_at === null" class="btn btn-danger">Finalizar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="row my-2">
+                <div class="col">
+                    <div *ngIf="tasks.length === 0">
+                        <strong>No hay tareas aún</strong>
+                    </div>
+                    <div class="row" *ngIf="tasks.length !== 0">
+                        <table>
+                            <thead>
+                                <tr class="border">
+                                    <th class="col-3 p-2">Tarea</th>
+                                    <th class="col-3 p-2">Creada el:</th>
+                                    <th class="col-3 p-2">Progreso</th>
+                                    <th class="col-3 p-2">Finalizada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border" *ngFor="let task of tasks; index as i">
+                                    <td class="col-3 p-2">
+                                        <span>{{task.task_name}}</span>
+                                    </td>
+                                    <td class="col-3 p-2">
+                                        <span>{{task.create_at | date}}</span>
+                                    </td>
+                                    <td class="col-3 p-2">
+                                        <span *ngIf="task.update_at !== null">{{task.update_at | date}}</span>
+                                        <button (click)='inProgress($event, i)' *ngIf="task.update_at === null" class="btn btn-pets">En progreso</button>
+                                    </td>
+                                    <td class="col-3 p-2">
+                                        <span *ngIf="task.update_at === null">La tarea aún no inicia</span>
+                                        <span *ngIf="task.update_at !== null && task.finalize_at !== null">{{task.finalize_at | date}}</span>
+                                        <button (click)='finalize($event, i)' *ngIf="task.update_at !== null && task.finalize_at === null" class="btn btn-outline-pets">Finalizar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <a class="btn btn-danger" (click)="logout($event)" routerLink="/">Salir</a>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <a class="btn btn-outline-pets" (click)="logout($event)" routerLink="/">Salir</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
