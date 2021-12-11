@@ -7,13 +7,37 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TasksService {
 
-  url: string = BACK_URL
+  url: string = BACK_URL+'tasks/'
 
   constructor(private http: HttpClient) { }
 
   getTasks(){
-    const urlBack = this.url+'get-tasks'
+    const urlBack = this.url
     return this.http.get(urlBack)
+  }
+
+  createTask(name: string){
+    const urlBack = this.url+'create'
+    const data = {
+      name
+    }
+    return this.http.post(urlBack, data)
+  }
+
+  updateTask(name: string){
+    const urlBack = this.url+'update'
+    const data = {
+      name
+    }
+    return this.http.patch(urlBack, data)
+  }
+
+  finalizeTask(name: string){
+    const urlBack = this.url+'finalize'
+    const data = {
+      name
+    }
+    return this.http.patch(urlBack, data)
   }
 
 }
