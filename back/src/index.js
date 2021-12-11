@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors")
-const {connectDB} = require("./frameworks_and_drivers/mongo");
+const {connectDB} = require("./frameworks_and_drivers/drivers/mongo");
 const {router} = require("./routes/index");
-const { port } = require("./frameworks_and_drivers/config");
+const { port } = require("./frameworks_and_drivers/drivers/config");
 
 const app = express();
 const PORT = port
