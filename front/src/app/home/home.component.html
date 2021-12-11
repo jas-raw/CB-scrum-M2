@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form onsubmit="save($event)">
+                <label for="add" class="form-label">Añadir tarea:</label>
+                <input id='add' type="text" class="form-control">
+                <input value="Guardar" type="submit" class="btn btn-success">
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div *ngIf="tasks.length === 0">
+                <strong>No hay tareas aún</strong>
+            </div>
+            <div *ngIf="tasks.length !== 0">
+                <table>
+                    <thead>
+                        <tr class="row justify-content-around">
+                            <th class="col-3">Tarea</th>
+                            <th class="col-3">Creada el:</th>
+                            <th class="col-3">Progreso</th>
+                            <th class="col-3">Finalizada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let task of tasks; index as i">
+                            <td>
+                                <span>{{task.task_name}}</span>
+                            </td>
+                            <td>
+                                <span>{{task.create_at}}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="task.update_at !== null">{{task.update_at}}</span>
+                                <button (click)='inProgress($event, i)' *ngIf="task.update_at === null" class="btn btn-success">En progreso</button>
+                            </td>
+                            <td>
+                                <span *ngIf="task.update_at === null">La tarea aún no inicia</span>
+                                <span *ngIf="task.update_at !== null && task.finalize_at !== null">{{task.finalize_at}}</span>
+                                <button (click)='finalize($event, i)' *ngIf="task.update_at !== null && task.finalize_at === null" class="btn btn-danger">Finalizar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-danger" (click)="logout($event)" routerLink="/">Salir</a>
+        </div>
+    </div>
+</div>
